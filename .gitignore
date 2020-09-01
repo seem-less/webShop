@@ -1,1 +1,4 @@
 node_modules
+.next
+client-config.js
+wooConfig.js
