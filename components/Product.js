@@ -2,12 +2,13 @@ const Product = (props) => {
 
     const {product} = props;
     return (
-        <div key={product.id} className="card mb-3">
+        <div className="card col-3 mb-3">
             <h3 className="card-header">{product.name}</h3>
-            <div className="card-body">
-                <h5 className="card-title">{product.price}</h5>
-            </div>
             <img src={product.images[0].src} alt={product.name} />
+            <div className="card-body">
+                <h6 className="card-subtitle text-center">{product.price}</h6>
+                <a href="" className="btn btn-primary">View</a>
+            </div>
         </div>
     )
 }

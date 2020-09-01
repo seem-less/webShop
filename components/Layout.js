@@ -1,12 +1,13 @@
 import Head from 'next/head';
 import Header from './Header';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/style.css' 
 
 const Layout = (props) => {
     return(
         <div>
             <Head>
                 <title>Blackseed site</title>
-                <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css" />
             </Head>
             <Header />
             {props.children}
