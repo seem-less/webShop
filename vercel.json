@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "alias": "kalonji",
+    "routes": [
+        {
+          "src": "/product/(?<slug>[^/]+)$",
+          "dest": "/product?slug=$slug"
+        }
+      ]
+  }
