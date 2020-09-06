@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AddToCartButton from './cart/AddToCartButton';
 
 const Product = (props) => {
 
@@ -13,6 +14,7 @@ const Product = (props) => {
             </Link>
             <div className="card-body">
                 <h6 className="card-subtitle text-center">{product.price}</h6>
+                <AddToCartButton product={product} />
             </div>
         </div>
     )

@@ -6,13 +6,13 @@ export const AppContext = React.createContext([
 ]);
 
 export const AppProvider = ( props ) => {
-    const [ cart, setCart ] = useState( {initialState: null} );
+    const [ cart, setCart ] = useState( null );
 
     useEffect( () => {
         if( process.browser ){
-            let cartData = localStorage.getItem( {key: 'blackseed-cart'});
+            let cartData = localStorage.getItem( 'blackseed-cart');
             cartData = cartData !== null ? JSON.parse( cartData ) : '';
-            setCart( {productId: '10' } );
+            setCart( cartData );
         }
     }, [] );
 
