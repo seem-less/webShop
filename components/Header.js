@@ -5,7 +5,6 @@ import { useContext } from "react";
 const Header = () => {
 
     const [ cart, setCart ] = useContext( AppContext );
-    console.warn('cart', cart);
     return(
         <div>
             <Nav/>

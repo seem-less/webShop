@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import Header from './Header';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/style.css' 
 import { AppProvider } from './context/AppContext';
 
 const Layout = (props) => {
