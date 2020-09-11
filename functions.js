@@ -60,7 +60,7 @@ export const updateCart = ( existingCart, product, qtyToBeAdded, newQty = false 
     const updatedCart = {
         products: updatedProducts,
         totalProductsCount: parseInt(total.qty),
-        totalProductsPrice: parseFloat( total.totalPrice)
+        totalProductsPrice: parseFloat( total.totalPrice )
     };
 
     localStorage.setItem('blackseed-cart', JSON.stringify( updatedCart ));

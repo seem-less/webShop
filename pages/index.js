@@ -1,10 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/style.css';
-
-import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css';
-config.autoAddCss = false;
-
 import Layout from "../components/Layout";
 import Product from "../components/Product";
 import { gql } from '@apollo/client';
