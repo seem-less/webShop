@@ -1,13 +1,16 @@
 import {useContext} from 'react';
 import {AppContext} from '../../context/AppContext';
 import CartItem from './CartItem'; 
+import { removeItemFromCart } from '../../../functions';
 
 const CartItemsContainer = () => {
 
     const[cart, setCart] = useContext(AppContext);
 
-    const handleRemoveProductClick = () => {
-        
+    const handleRemoveProductClick = (event,productId) => {
+        const updatedCart = removeItemFromCart(productId);
+
+        setCart(updatedCart);
     }
 
     return(
@@ -39,6 +42,22 @@ const CartItemsContainer = () => {
                         ): ''}
                     </tbody>
                     </table>
+                    {/* Cart Total */}
+                    <div className="row blackseed-cart-total-container mt-5">
+                        <h2>Cart Total</h2>
+                        <table className="table table-hover">
+                            <tbody>
+                                <tr className="table-light">
+                                    <td className="blackseed-cart-element-total">Subtotal</td>
+                                    <td className="blackseed-cart-element-amt">{cart.totalProductsPrice}</td>
+                                </tr>
+                                <tr className="table-light">
+                                    <td className="blackseed-cart-element-total">Total</td>
+                                    <td className="blackseed-cart-element-amt">{cart.totalProductsPrice}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             ) : ''}
         </div>

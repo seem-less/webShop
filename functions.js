@@ -122,3 +122,38 @@ export const isProductInCart = (existingProductsInCart, productId) => {
 
     return existingProductsInCart.indexOf( newArray[0] );
 }
+
+export const removeItemFromCart = (productId) => {
+    // get the existing cart data.
+    let existingCart = localStorage.getItem( 'blackseed-cart' );
+    existingCart = JSON.parse(existingCart);
+
+    // if there is only one item in the cart, delete the cart
+    if(1 === existingCart.products.length){
+        localStorage.removeItem('blackseed-cart');
+        return null;
+    }
+
+    // check if the product already exists in the cart
+    const productExistsIndex = isProductInCart(existingCart.products, productId);
+
+    // if product to be removed exists
+    if(-1 < productExistsIndex){
+        const productToBeRemoved = existingCart.products[productExistsIndex];
+        const qtyToBeRemovedFromTotal = productToBeRemoved.qty;
+        const priceToBeDeductedFromTotal = productToBeRemoved.totalPrice;
+
+        // remove that product from the array and update the total price and total qty
+        let updatedCart = existingCart;
+        updatedCart.products.splice( productExistsIndex, 1 );
+        updatedCart.totalProductsCount = updatedCart.totalProductsCount - qtyToBeRemovedFromTotal;
+        updatedCart.totalProductsPrice = updatedCart.totalProductsPrice - priceToBeDeductedFromTotal;
+        
+        localStorage.setItem('black-seed', JSON.stringify(updatedCart));
+
+        return updatedCart;
+    }else{
+        return existingCart;
+    }
+
+}

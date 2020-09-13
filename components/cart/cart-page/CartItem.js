@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
+import { updateCart, removeItemFromCart } from '../../../functions';
 
 const CartItem = ({item, setCart, handleRemoveProductClick}) => {
 
@@ -11,7 +12,13 @@ const CartItem = ({item, setCart, handleRemoveProductClick}) => {
             const newQty = event.target.value;
             setProductCount(newQty);
 
-            // @TODO update the cart
+            let existingCart = localStorage.getItem( 'blackseed-cart' );
+            existingCart = JSON.parse(existingCart);
+
+            // update the cart
+            const updatedCart = updateCart(existingCart, item, false, newQty);
+
+            setCart(updatedCart);
         }
     }
 
@@ -19,7 +26,7 @@ const CartItem = ({item, setCart, handleRemoveProductClick}) => {
         <tr className="blackseed-cart-item" key={item.productId}>
             {/* Cross Icon */}
             <th className="blackseed-cart-element blackseed-cart-el-close">
-                <span className="blackseed-cart-close-icon" onClick={ (event) => handleRemoveProductClick(event) }>
+                <span className="blackseed-cart-close-icon" onClick={ (event) => handleRemoveProductClick(event, item.productId) }>
                     <FontAwesomeIcon icon={faTimesCircle}/>
                 </span>
             </th>
