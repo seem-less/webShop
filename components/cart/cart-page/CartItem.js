@@ -53,7 +53,7 @@ const CartItem = ({item, setCart, handleRemoveProductClick}) => {
             </td>
             {/* Total */}
             <td className="blackseed-cart-element">
-                {parseFloat(item.totalPrice).toFixed(2)}
+                ${item.totalPrice}
             </td>
         </tr>
     )
