@@ -2,6 +2,7 @@ import {useContext} from 'react';
 import {AppContext} from '../../context/AppContext';
 import CartItem from './CartItem'; 
 import { removeItemFromCart } from '../../../functions';
+import Link from 'next/link';
 
 const CartItemsContainer = () => {
 
@@ -58,6 +59,14 @@ const CartItemsContainer = () => {
                             </tbody>
                         </table>
                     </div>
+                    {/* Proceed to checkout */}
+                    <Link href="/checkout">
+                        <button className="btn btn-secondary blackseed-large-black">
+                            <span className="blackseed-cart-checkout-text">
+                                Proceed to Checkout
+                            </span>
+                        </button> 
+                    </Link>
                 </div>
             ) : ''}
         </div>

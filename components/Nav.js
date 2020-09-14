@@ -8,17 +8,13 @@ const Nav = () => {
                 <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
                     <Link href="/">
-                        <a className="nav-link">Home <span className="sr-only">(current)</span></a>
+                        <a className="nav-link">Home<span className="sr-only">(current)</span></a>
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Features</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">Pricing</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">About</a>
+                    <Link href="/categories">
+                        <a className="nav-link">Categories<span className="sr-only">(current)</span></a>
+                    </Link>
                 </li>
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
