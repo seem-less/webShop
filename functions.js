@@ -1,3 +1,5 @@
+import { v4 } from 'uuid';
+
 export const getFloatVal = (string) => {
     /**
      * drop the first char (typically a currency sign) from price string in db
@@ -149,7 +151,7 @@ export const removeItemFromCart = (productId) => {
         updatedCart.totalProductsCount = updatedCart.totalProductsCount - qtyToBeRemovedFromTotal;
         updatedCart.totalProductsPrice = updatedCart.totalProductsPrice - priceToBeDeductedFromTotal;
         
-        localStorage.setItem('black-seed', JSON.stringify(updatedCart));
+        localStorage.setItem('blackseed-cart', JSON.stringify(updatedCart));
 
         return updatedCart;
     }else{
@@ -201,3 +203,47 @@ export const getFormattedCart = (data) => {
 
 	return formattedCart;
 }
+
+/**
+ * Sorts checkout data into required shape for WP-woo-commerce
+ * 
+ * @param {Object} order 
+ */
+export const createCheckoutData = ( order ) => {
+	const checkoutData = {
+		clientMutationId: v4(),
+
+		billing: {
+			firstName: order.firstName,
+			lastName: order.lastName,
+			address1: order.address1,
+			address2: order.address2,
+			city: order.city,
+			country: order.country,
+			state: order.state,
+			postcode: order.postcode,
+			email: order.email,
+			phone: order.phone,
+			company: order.company,
+		},
+		shipping: {
+			firstName: order.firstName,
+			lastName: order.lastName,
+			address1: order.address1,
+			address2: order.address2,
+			city: order.city,
+			country: order.country,
+			state: order.state,
+			postcode: order.postcode,
+			email: order.email,
+			phone: order.phone,
+			company: order.company,
+		},
+		shipToDifferentAddress: false,
+		paymentMethod: order.paymentMethod,
+		isPaid: false,
+		transactionId: "hjkhjkhsdsdiui"
+	};
+
+	return checkoutData;
+};

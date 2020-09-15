@@ -7,6 +7,13 @@ const CartItem = ({item, setCart, handleRemoveProductClick}) => {
 
     const [productCount, setProductCount ] = useState(item.qty);
 
+    /**
+     * When user changes the qty from product input update the cart in localstorage
+     * Also update the cart in global context
+     * 
+     * @param {Object} event event
+     * @return {void}
+     */
     const handleQtyChange = (event) => {
         if(process.browser){
             const newQty = event.target.value;
@@ -53,7 +60,7 @@ const CartItem = ({item, setCart, handleRemoveProductClick}) => {
             </td>
             {/* Total */}
             <td className="blackseed-cart-element">
-                ${item.totalPrice}
+                {item.totalPrice}
             </td>
         </tr>
     )

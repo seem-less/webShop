@@ -1,13 +1,35 @@
 import {useContext} from 'react';
 import {AppContext} from '../../context/AppContext';
 import CartItem from './CartItem'; 
-import { removeItemFromCart } from '../../../functions';
+import { removeItemFromCart, getFormattedCart } from '../../../functions';
 import Link from 'next/link';
+import GET_CART from '../../../queries/get-cart.js'
+import { useQuery } from '@apollo/client';
 
 const CartItemsContainer = () => {
 
-    const[cart, setCart] = useContext(AppContext);
+    // ***for offline version (PWA)***
+    //const[cart, setCart] = useContext(AppContext);
+    const setCart = () => {};
 
+    // Get Cart Data.
+    const {loading, error, data, refetch } = useQuery(GET_CART,{
+        notifyOnNetworkStatusChange: true,
+        onCompleted: () => {
+
+        }
+    });
+
+    const cart = data !== undefined ? getFormattedCart(data) : null;
+
+    /**
+     * Handle remove product click.
+     * 
+     * @param {Object} event 
+     * @param {Integer} productId 
+     * 
+     * @return {void}
+     */
     const handleRemoveProductClick = (event,productId) => {
         const updatedCart = removeItemFromCart(productId);
 
