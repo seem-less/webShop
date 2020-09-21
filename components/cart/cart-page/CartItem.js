@@ -1,9 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
-import { updateCart, removeItemFromCart } from '../../../functions';
+import { getUpdatedItems, removeItemFromCart } from '../../../functions';
+import { v4 } from 'uuid';
 
-const CartItem = ({item, setCart, handleRemoveProductClick}) => {
+const CartItem = ({ item,
+                    products,
+                    updateCartProcessing,
+                    handleRemoveProductClick,
+                    updateCart}) => {
 
     const [productCount, setProductCount ] = useState(item.qty);
 
@@ -14,18 +19,31 @@ const CartItem = ({item, setCart, handleRemoveProductClick}) => {
      * @param {Object} event event
      * @return {void}
      */
-    const handleQtyChange = (event) => {
+    const handleQtyChange = (event, cartKey) => {
         if(process.browser){
-            const newQty = event.target.value;
+
+            event.stopPropagation();
+
+            // If the previous update cart mutation request is still processing, then return.
+			if ( updateCartProcessing ) {
+				return;
+			}
+
+            const newQty = ( event.target.value ) ? parseInt( event.target.value ) : 1;
             setProductCount(newQty);
 
-            let existingCart = localStorage.getItem( 'blackseed-cart' );
-            existingCart = JSON.parse(existingCart);
+            if ( products.length ) {
 
-            // update the cart
-            const updatedCart = updateCart(existingCart, item, false, newQty);
-
-            setCart(updatedCart);
+				const updatedItems = getUpdatedItems( products, newQty, cartKey );
+				updateCart( {
+					variables: {
+						input: {
+							clientMutationId: v4(),
+							items: updatedItems
+						}
+					},
+				} );
+			}
         }
     }
 
@@ -33,7 +51,7 @@ const CartItem = ({item, setCart, handleRemoveProductClick}) => {
         <tr className="blackseed-cart-item" key={item.productId}>
             {/* Cross Icon */}
             <th className="blackseed-cart-element blackseed-cart-el-close">
-                <span className="blackseed-cart-close-icon" onClick={ (event) => handleRemoveProductClick(event, item.productId) }>
+                <span className="blackseed-cart-close-icon" onClick={ (event) => handleRemoveProductClick( event, item.key, products) }>
                     <FontAwesomeIcon icon={faTimesCircle}/>
                 </span>
             </th>
@@ -54,13 +72,16 @@ const CartItem = ({item, setCart, handleRemoveProductClick}) => {
                 <input 
                 type="number"
                 min="1"
-                className="blackseed-cart-qty-input"
+                data-cart-key={item.key}
+                className={`blackseed-cart-qty-input form-control ${ updateCartProcessing ? 'blackseed-cart-disabled' : '' }`}
                 value={ productCount }
-                onChange={handleQtyChange}/>
+                onChange={( event ) => handleQtyChange( event, item.key )}/>
+                { updateCartProcessing ?
+					<img className="blackseed-cart-item-spinner" src="/cart-spinner.gif" alt="spinner"/> : '' }
             </td>
             {/* Total */}
             <td className="blackseed-cart-element">
-                {item.totalPrice}
+                {( 'string' !== typeof item.totalPrice ) ? item.totalPrice.toFixed( 2 ) : item.totalPrice}
             </td>
         </tr>
     )

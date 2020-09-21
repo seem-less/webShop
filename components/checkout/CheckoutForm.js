@@ -82,7 +82,6 @@ const CheckoutForm = () => {
 			setInput( { ...input,  errors: result.errors } );
 			return;
         }
-        console.log(input);
 		const checkOutData = createCheckoutData( input );
 		setOrderData( checkOutData );
 		setRequestError( null );
