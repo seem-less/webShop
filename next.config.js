@@ -12,7 +12,7 @@ module.exports = {
         //     jQuery: "jquery"
         // }))
 
-        //console.log(config.entry);
+
 
         // config.plugins.push(new InjectPlugin(function() {
         //     return uiCore + customScript;

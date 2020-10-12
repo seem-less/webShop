@@ -22,7 +22,7 @@ const Categories = (props) => {
     )
 }
 
-Categories.getInitialProps = async () => {
+Categories.getStaticProps = async () => {
     const result = await client.query({
         query: CATEGORIES_QUERY
     });

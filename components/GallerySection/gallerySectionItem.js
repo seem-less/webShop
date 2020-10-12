@@ -53,7 +53,6 @@ const GallerySectionItem = props => {
             // localStorage.setItem('blackseed-cart', JSON.stringify(updatedCart));
 
             // setCart(updatedCart);
-            // console.log(data.productCategory.products.edges);
             setProductsInCategory(data.productCategory.products.edges);
         }
     });

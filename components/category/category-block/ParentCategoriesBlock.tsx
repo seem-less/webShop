@@ -8,7 +8,7 @@ export interface ParentCategoriesBlockProps {
 const ParentCategoriesBlock = (props: ParentCategoriesBlockProps) => {
 
     const {productCategories} = props;
-    console.log(productCategories);
+
     return(
         <div className="product-container row d-flex justify-content-center">
             {productCategories.length ? (

@@ -1,7 +1,6 @@
 /* components/GallerySection/gallerySection.js */
 
 import { useState } from 'react';
-import { number } from 'prop-types';
 
 //import categoryListQuery from '@magento/venia-ui/lib/queries/getCategoryListGallerySection.graphql';
 //import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';

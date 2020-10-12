@@ -4,8 +4,8 @@ import { AppContext } from '../context/AppContext';
 import { addFirstProduct, getFormattedCart, updateCart } from '../../functions';
 import {v4} from 'uuid';
 import { useQuery, useMutation } from '@apollo/client';
-import GET_CART from '../../queries/get-cart.js';
-import ADD_TO_CART from '../../mutations/add-to-cart.js'
+import GET_CART from '../../queries/get-cart';
+import ADD_TO_CART from '../../mutations/add-to-cart'
 
 const AddToCartButton = ( props ) => {
 

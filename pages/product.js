@@ -42,7 +42,7 @@ const Product = ( props ) => {
     )
 }
 
-Product.getInitialProps = async ( context ) => {
+Product.getStaticProps = async ( context ) => {
 
     let { query: { slug } } = context;
 
