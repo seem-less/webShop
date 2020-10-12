@@ -265,7 +265,6 @@ export const getUpdatedItems = ( products, newQty, cartKey ) => {
 	const updatedItems = [];
 	// Loop through the product array.
 	products.map( ( cartItem ) => {
-        console.log(cartItem);
 		// If you find the cart key of the product user is trying to update, push the key and new qty.
 		if ( cartItem.key === cartKey ) {
 

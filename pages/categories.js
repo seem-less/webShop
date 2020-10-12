@@ -2,19 +2,7 @@ import Layout from "../components/Layout";
 import { gql } from '@apollo/client';
 import client from "../components/ApolloClient";
 import ParentCategoriesBlock from "../components/category/category-block/ParentCategoriesBlock";
-
-const CATEGORIES_QUERY = gql`query {
-    productCategories(first: 3) {
-        nodes {
-        name
-        id
-        slug
-        image {
-            sourceUrl
-        }
-        }
-    }
-}`
+import CATEGORIES_QUERY from "../queries/get-categories";
 
 const Categories = (props) => {
 

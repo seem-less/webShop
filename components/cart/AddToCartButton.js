@@ -100,7 +100,7 @@ const AddToCartButton = ( props ) => {
             <button onClick= { handleAddToCartClick } className="btn btn-secondary">Add to cart</button>
             { showViewCart ? (
                 <Link href="/cart">
-                    <button className="black-seed-view-cart-btn btn btn-secondary">View Cart</button>
+                    <button className="button button-primary button-zakaria fl-bigmug-line-shopping202">View Cart</button>
                 </Link>
             ): ''}
         </>

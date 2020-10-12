@@ -1,9 +1,14 @@
 import ParentCategoryBlock from "./ParentCategoryBlock";
+import {Category} from "./ParentCategoryBlock";
 
-const ParentCategoriesBlock = (props) => {
+export interface ParentCategoriesBlockProps {
+    productCategories: Array<Category>
+}
+
+const ParentCategoriesBlock = (props: ParentCategoriesBlockProps) => {
 
     const {productCategories} = props;
-
+    console.log(productCategories);
     return(
         <div className="product-container row d-flex justify-content-center">
             {productCategories.length ? (

@@ -3,33 +3,7 @@ import {withRouter} from 'next/router';
 import { gql } from '@apollo/client';
 import client from "../components/ApolloClient";
 import Product from "../components/Product";
-
-const GET_CATEGORY_BY_ID = gql`query Product_Category( $id: ID! ){
-    productCategory(id: $id) {
-        name
-        products {
-            edges {
-                node {
-                ... on SimpleProduct {
-                        id
-                        name
-                        productId
-                        slug
-                        description
-                        price
-                        image {
-                            uri
-                            srcSet
-                            sourceUrl
-                            title
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-`
+import GET_CATEGORY_BY_ID from '../queries/get-categeory-by-id';
 
 const Category = (props) => {
     const {categoryName, products} = props;

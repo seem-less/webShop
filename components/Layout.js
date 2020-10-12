@@ -3,9 +3,11 @@ import Header from './Header';
 import { AppProvider } from './context/AppContext';
 import {ApolloProvider} from '@apollo/client';
 import client from "../components/ApolloClient";
+import Footer from './Footer';
 
 const Layout = (props) => {
-    return(
+
+    return( 
         <AppProvider>
             <ApolloProvider client={client}>
                 <div>
@@ -14,6 +16,7 @@ const Layout = (props) => {
                     </Head>
                     <Header />
                     {props.children}
+                    <Footer />
                 </div>
             </ApolloProvider>
         </AppProvider>

@@ -3,6 +3,8 @@ import Product from "../components/Product";
 import ParentCategoriesBlock from "../components/category/category-block/ParentCategoriesBlock";
 import { gql } from '@apollo/client';
 import client from "../components/ApolloClient";
+import GallerySection from "../components/GallerySection/gallerySection";
+import {ParentCategoriesBlockProps} from '../components/category/category-block/ParentCategoriesBlock';
 
 const PRODUCTS_AND_CATEGORIES_QUERY = gql`query{
   products(first: 10) {
@@ -44,30 +46,54 @@ const PRODUCTS_AND_CATEGORIES_QUERY = gql`query{
  * @constructor 
  */
 
-const Index = ( props ) => {
+const Index = (props: indexInitialProps) => {
     
     const {products, productCategories} = props;
-    
+
     return(
     <Layout>
         {/* Categories */}
         <div className="mt-5 text-center">
           <h2>Categories</h2>
           <ParentCategoriesBlock productCategories={productCategories} />
+          {/* <GallerySection /> */}
+          {/* <GallerySectionItem catId={'dGVybToxNw=='} products={products} /> */}
         </div>
 
+
+
         {/* Products */}
-        <h2 className="mt-5 text-center">Products</h2>
+        {/* <h2 className="mt-5 text-center">Products</h2>
         <div className="product-container">
             {products.length ? (
                 products.map(product => <Product key={product.id} product={ product } />)
             ) : ''}
-        </div>
+        </div> */}
     </Layout>
     )
 }
 
-Index.getInitialProps = async () => {
+export interface indexInitialProps extends ParentCategoriesBlockProps {
+  products: {
+    nodes:[{
+      id: string,
+      name: string,
+      price: string,
+      image: {
+        uri: string,
+        title: string,
+        srcSet?: string,
+        sourceUrl: string,
+        description?: string, 
+      },
+      productId: number,
+      averageRating: number,
+      slug: string
+    }]
+  },
+}
+
+Index.getInitialProps = async (): Promise<indexInitialProps> => {
     const result = await client.query({query: PRODUCTS_AND_CATEGORIES_QUERY});
 
     return{
