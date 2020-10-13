@@ -1,7 +1,6 @@
-import fetch from 'node-fetch';
-import {ApolloClient, InMemoryCache, ApolloLink, createHttpLink} from '@apollo/client';
+import fetch from 'cross-fetch';
+import {ApolloClient, InMemoryCache, ApolloLink, HttpLink} from '@apollo/client';
 import clientConfig from '../client-config';
-
 
 /**
  * Middleware operation
@@ -52,7 +51,7 @@ export const afterware = new ApolloLink( (operation, forward)  => {
 })
 
 const client = new ApolloClient( {
-    link: middleware.concat(afterware.concat(createHttpLink({
+    link: middleware.concat(afterware.concat(new HttpLink({
         uri: clientConfig.graphqlUrl,
         fetch: fetch
     }))),

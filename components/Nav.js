@@ -106,7 +106,9 @@ const Nav = () => {
                         <ul className="rd-navbar-nav">
                             <li className="rd-nav-item active">                        
                                 <Link href="/">
-                                    <a className="rd-nav-link">Home<span className="sr-only">(current)</span></a>
+                                    <a className="rd-nav-link">
+                                        Home<span className="sr-only">(current)</span>
+                                    </a>
                                 </Link>
                             </li>
                             <li className="rd-nav-item"><a className="rd-nav-link" href="#">Pages</a>

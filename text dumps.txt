@@ -1,0 +1,12 @@
+old routes prop for vercel config:
+
+"routes": [
+    {
+        "src": "/product/(?<slug>[^/]+)$",
+        "dest": "/product?slug=$slug"
+    },
+   {
+        "src": "/category/(?<slug>[^/]+)$",
+        "dest": "/category?slug=$slug"
+    }
+]

@@ -6,18 +6,18 @@ export interface ProductTypes {
         name: string,
         price: string,
         image: {
-        uri: string,
-        title: string,
-        srcSet?: string,
-        sourceUrl: string,
-        description?: string, 
+            uri: string,
+            title: string,
+            srcSet?: string,
+            sourceUrl: string,
+            description?: string, 
         },
         productId: number,
         averageRating: number,
         slug: string
 }
 
-interface ProductProps {
+export interface ProductProps {
     key: string
     product: ProductTypes
 }
@@ -25,6 +25,7 @@ interface ProductProps {
 const Product = (props: ProductProps) => {
 
     const {product} = props;
+    
     const productLink = `/product/${product.slug}-${product.productId}`;
     return (
         <div key={product.id} className="col-sm-6 col-lg-4 col-xl-3 isotope-item">
@@ -32,16 +33,10 @@ const Product = (props: ProductProps) => {
             <article className="thumbnail-classic block-1">
             <div className="thumbnail-classic-figure">
 
-            <Link as={productLink} href={`/product?slug=${product.slug}-${product.productId}`}>
+            <Link href={productLink}>
                 <img
                     alt={product.name}
                     src={product.image.sourceUrl}
-                    // classes={{
-                    //     image: classes.image,
-                    //     root: classes.imageContainer
-                    // }}
-                    //height={IMAGE_HEIGHT}
-                    //width={IMAGE_WIDTHS}
                 />
             </Link>
             </div>
@@ -49,7 +44,7 @@ const Product = (props: ProductProps) => {
                 <div>
                 <h5 className="thumbnail-classic-title">
                 {/* className={classes.name} */}
-                    <Link as={productLink} href={`/product?slug=${product.slug}-${product.productId}`}>
+                    <Link href={productLink}>
                         <span>{product.name}</span>
                     </Link>
                 </h5>
@@ -59,7 +54,7 @@ const Product = (props: ProductProps) => {
                 </div>
                 <div className="thumbnail-classic-button-wrap">
                     <div className="thumbnail-classic-button">
-                        <Link as={productLink} href={`/product?slug=${product.slug}-${product.productId}`}>
+                        <Link href={productLink}>
                             <a className="button button-gray-6 button-zakaria fl-bigmug-line-search74" />
                         </Link>
                     </div>

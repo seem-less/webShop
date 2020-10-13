@@ -17,7 +17,7 @@ import {ProductTypes} from '../components/Product';
  * @return {*}
  * @constructor 
  */
-const Index = (props: indexInitialProps) => {
+const Index = (props:{products: Array<ProductTypes>,productCategories: Array<Category>}) => {
   
   const {products, productCategories} = props;
 

@@ -19,6 +19,7 @@
     "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.2",
+    "cross-fetch": "^3.0.6",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "next": "^9.5.2",
