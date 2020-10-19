@@ -1,15 +1,13 @@
 import Link from 'next/link';
 import {useState, useContext} from 'react';
 import { AppContext } from '../context/AppContext';
-import { addFirstProduct, getFormattedCart, updateCart } from '../../functions';
+import { addFirstProduct, getFormattedCart, updateCart, product } from '../../functions';
 import {v4} from 'uuid';
 import { useQuery, useMutation } from '@apollo/client';
 import GET_CART from '../../queries/get-cart';
-import ADD_TO_CART from '../../mutations/add-to-cart'
+import ADD_TO_CART from '../../mutations/add-to-cart';
 
-const AddToCartButton = ( props ) => {
-
-    const {product} = props;
+const AddToCartButton = ( {product}:{product:product} ) => {
 
     const productQryInput = {
         clientMutationId: v4(), // Generate a unique id.
@@ -18,7 +16,7 @@ const AddToCartButton = ( props ) => {
 
     const [ cart, setCart ] = useContext(AppContext);
     const [ showViewCart, setShowViewCart] = useState(false);
-    const [ requestError, setRequestError ] = useState(null);
+    const [ requestError, setRequestError ] = useState<null | string>(null);
 
     const handleAddToCartClick = () => {
         setRequestError( null );
@@ -86,7 +84,7 @@ const AddToCartButton = ( props ) => {
         },
         onError: (error) => {
             if(error) {
-                setRequestError(error.graphQlErrors[0].message);
+                setRequestError(error.graphQLErrors[0].message);
             }
         }
 

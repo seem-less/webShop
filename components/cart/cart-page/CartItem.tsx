@@ -1,14 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
-import { getUpdatedItems, removeItemFromCart } from '../../../functions';
+import { getUpdatedItems, image, products, item } from '../../../functions';
 import { v4 } from 'uuid';
+
+type updateCart = {
+
+};
 
 const CartItem = ({ item,
                     products,
                     updateCartProcessing,
                     handleRemoveProductClick,
-                    updateCart}) => {
+                    updateCart}: {item: item, 
+                                products: products,
+                                updateCartProcessing: boolean,
+                                handleRemoveProductClick: (event: React.MouseEvent<HTMLElement>, cartKey:string, products:products) => void,
+                                updateCart: updateCart}) => {
 
     const [productCount, setProductCount ] = useState(item.qty);
 
@@ -19,7 +27,7 @@ const CartItem = ({ item,
      * @param {Object} event event
      * @return {void}
      */
-    const handleQtyChange = (event, cartKey) => {
+    const handleQtyChange = (event:React.ChangeEvent<HTMLInputElement>, cartKey:string) => {
         if(process.browser){
 
             event.stopPropagation();
@@ -34,7 +42,7 @@ const CartItem = ({ item,
 
             if ( products.length ) {
 
-				const updatedItems = getUpdatedItems( products, newQty, cartKey );
+				const updatedItems = getUpdatedItems( products, newQty.toString(), cartKey );
 				updateCart( {
 					variables: {
 						input: {

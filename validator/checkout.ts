@@ -1,12 +1,16 @@
 import validator from 'validator';
 import isEmpty from './isEmpty';
 import config from '../client-config';
+import {CheckoutFormInitialState} from '../functions';
 
+interface validateAndSanitizeCheckoutFormType extends CheckoutFormInitialState{
+	[fieldName:string]:any
+}
 
-const validateAndSanitizeCheckoutForm = ( data ) => {
+const validateAndSanitizeCheckoutForm = ( data:validateAndSanitizeCheckoutFormType ) => {
 
-	let errors = {};
-	let sanitizedData = {};
+	let errors: any = {};
+	let sanitizedData: any = {};
 
 	/**
 	 * Set the firstName value equal to an empty string if user has not entered the firstName, otherwise the Validator.isEmpty() wont work down below.
@@ -25,7 +29,7 @@ const validateAndSanitizeCheckoutForm = ( data ) => {
 	data.postcode = ( ! isEmpty( data.postcode ) ) ? data.postcode : '';
 	data.phone = ( ! isEmpty( data.phone ) ) ? data.phone : '';
 	data.email = ( ! isEmpty( data.email ) ) ? data.email : '';
-	data.createAccount = ( ! isEmpty( data.createAccount ) ) ? data.createAccount : '';
+	data.createAccount = ( ! isEmpty( data.createAccount ) ) ? data.createAccount : false;
 	data.orderNotes = ( ! isEmpty( data.orderNotes ) ) ? data.orderNotes : '';
 	data.paymentMethod = ( ! isEmpty( data.paymentMethod ) ) ? data.paymentMethod : '';
 
@@ -40,15 +44,16 @@ const validateAndSanitizeCheckoutForm = ( data ) => {
 	 * @param {String} type Type e.g. email, phone etc.
 	 * @param {boolean} required Required if required is passed as false, it will not validate error and just do sanitization.
 	 */
-	const addErrorAndSanitizedData = ( fieldName, errorContent, min, max, type = '', required ) => {
+	const addErrorAndSanitizedData = ( fieldName: string, errorContent:string, min:number, max:number, type:string = '', required:boolean ) => {
 
 		const postCodeLocale = config.postCodeLocale ? config.postCodeLocale : '';
+
 		/**
 		 * Please note that this isEmpty() belongs to validator and not our custom function defined above.
 		 *
 		 * Check for error and if there is no error then sanitize data.
 		 */
-		if ( ! validator.isLength( data[ fieldName ], { min, max } ) ){
+		if ( ! validator.isLength(data[fieldName], { min, max } ) ){
 			errors[ fieldName ] = `${errorContent} must be ${min} to ${max} characters`;
 		}
 

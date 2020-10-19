@@ -1,7 +1,12 @@
 import { Fragment } from 'react';
 import CheckoutCartItem from "./CheckoutCartItem";
 
-const YourOrder = ( { cart } ) => {
+type yourOrderProps = {
+	products:Array<any>,
+	totalProductsPrice : string,
+}
+
+const YourOrder = ( { cart }:{cart:yourOrderProps} ) => {
 
 	return (
 		<Fragment>

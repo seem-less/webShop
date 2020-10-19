@@ -1,6 +1,6 @@
 import Error from "./Error";
 
-const PaymentModes = ( { input, handleOnChange } ) => {
+const PaymentModes = ( { input, handleOnChange }:{input: {errors:{fieldName:string}},handleOnChange: ( event: React.ChangeEvent<HTMLInputElement> )=>void} ) => {
 	return (
 		<div className="mt-3">
 			<Error errors={ input.errors } fieldName={ 'paymentMethod' }/>

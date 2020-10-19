@@ -1,4 +1,6 @@
-const CheckoutCartItem = ( { item } ) => {
+import {item} from '../../functions';
+
+const CheckoutCartItem = ( { item }:{item:item} ) => {
 
 	return (
 		<tr className="blackseed-cart-item" key={ item.productId }>

@@ -26,7 +26,7 @@ const Product = (props: ProductProps) => {
 
     const {product} = props;
     
-    const productLink = `/product/${product.slug}-${product.productId}`;
+    const productLink = `/product/${product.slug}/${product.productId}`;
     return (
         <div key={product.id} className="col-sm-6 col-lg-4 col-xl-3 isotope-item">
         {/* <!-- Thumbnail Classic--> */}

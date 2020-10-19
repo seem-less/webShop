@@ -1,10 +1,11 @@
 import Layout from "../components/Layout";
-import { gql } from '@apollo/client';
 import client from "../components/ApolloClient";
 import ParentCategoriesBlock from "../components/category/category-block/ParentCategoriesBlock";
 import CATEGORIES_QUERY from "../queries/get-categories";
+import { GetStaticProps } from 'next'
+import {Category} from "../components/category/category-block/ParentCategoryBlock";
 
-const Categories = (props) => {
+const Categories = (props: {productCategories: Array<Category>}) => {
 
     const {productCategories} = props;
 
@@ -16,19 +17,20 @@ const Categories = (props) => {
                 <ParentCategoriesBlock
                     productCategories={ productCategories }
                 />
-                
             </div>
         </Layout>
     )
 }
 
-Categories.getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
     const result = await client.query({
         query: CATEGORIES_QUERY
     });
 
     return{
-        productCategories: result.data.productCategories.nodes
+        props:{
+            productCategories: result.data.productCategories.nodes
+        }
     }
 };
 

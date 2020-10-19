@@ -1,6 +1,15 @@
-const OrderSuccess = ( props ) => {
+type response = {
+	checkout:{
+		redirect: string,
+		result?: string
+		order:{
+			orderId:string,
+			status:string
+		}
+	}
+}
 
-	const { response } = props;
+const OrderSuccess = ( { response }:{ response: response } ) => {
 
 	if ( ! response ) {
 		return null;

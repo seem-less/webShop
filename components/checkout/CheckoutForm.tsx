@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import GET_CART from "../../queries/get-cart";
 import CHECKOUT_MUTATION from "../../mutations/checkout";
-import { getFormattedCart, createCheckoutData } from "../../functions";
+import { getFormattedCart, createCheckoutData, order, CheckoutFormInitialState } from "../../functions";
 import validateAndSanitizeCheckoutForm from "../../validator/checkout";
 import PaymentModes from "./PaymentModes";
 import Billing from "./Billing";
@@ -12,7 +12,7 @@ import OrderSuccess from "./OrderSucess";
 
 const CheckoutForm = () => {
 
-    const initialState = {
+    const initialState:CheckoutFormInitialState = {
         firstName: '',
 		lastName: '',
 		company: '',
@@ -33,7 +33,7 @@ const CheckoutForm = () => {
     const [cart, setCart] = useContext(AppContext);
     const [input, setInput] = useState(initialState);
     const [orderData, setOrderData] = useState(null);
-    const [requestError, setRequestError] = useState(null);
+    const [requestError, setRequestError] = useState<null | string>(null);
 
     // Get Cart Data
     const {loading, error, data, refetch} = useQuery(GET_CART, {
@@ -75,7 +75,7 @@ const CheckoutForm = () => {
 	 *
 	 * @return {void}
 	 */
-	const handleFormSubmit = ( event ) => {
+	const handleFormSubmit = ( event: React.FormEvent ) => {
 		event.preventDefault();
 		const result = validateAndSanitizeCheckoutForm( input );
 		if ( ! result.isValid ) {
@@ -94,7 +94,7 @@ const CheckoutForm = () => {
 	 *
 	 * @return {void}
 	 */
-	const handleOnChange = ( event ) => {
+	const handleOnChange = ( event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> ):void => {
 
 		if ( 'createAccount' === event.target.name ) {
 			const newState = { ...input, [event.target.name]: ! input.createAccount };

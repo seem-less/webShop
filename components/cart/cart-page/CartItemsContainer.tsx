@@ -1,19 +1,28 @@
 import {useContext, useState, useEffect} from 'react';
 import {AppContext} from '../../context/AppContext';
 import CartItem from './CartItem'; 
-import { removeItemFromCart, getUpdatedItems, getFormattedCart } from '../../../functions';
+import { getUpdatedItems, getFormattedCart, products, updatedItems } from '../../../functions';
 import Link from 'next/link';
 import UPDATE_CART from "../../../mutations/update-cart";
-import GET_CART from '../../../queries/get-cart.js'
+import GET_CART from '../../../queries/get-cart'
 import CLEAR_CART_MUTATION from "../../../mutations/clear-cart";
 import { useMutation, useQuery } from '@apollo/client';
 import { v4 } from 'uuid';
+
+type updateCartData ={
+    variables: {
+        input: {
+            clientMutationId: string,
+            items: Array<updatedItems>
+        }
+    }
+}
 
 const CartItemsContainer = () => {
 
     // @TODO for offline version (PWA)
     const[cart, setCart] = useContext(AppContext);
-    const [requestError, setRequestError] = useState( null );
+    const [requestError, setRequestError] = useState<null | string>( null );
 
     // Get Cart Data.
     const {loading, error, data, refetch } = useQuery(GET_CART,{
@@ -58,18 +67,18 @@ const CartItemsContainer = () => {
      * Handle remove product click.
      * 
      * @param {Object} event 
-     * @param {Object} products 
+     * @param {products} products 
      * 
      * @return {void}
      */
-	const handleRemoveProductClick = ( event, cartKey, products ) => {
+	const handleRemoveProductClick = ( event: React.MouseEvent<HTMLElement>, cartKey:string, products:products ) => {
 
 		event.stopPropagation();
 		if ( products.length ) {
 
 			// By passing the newQty to 0 in updateCart Mutation, it will remove the item.
 			const newQty = 0;
-			const updatedItems = getUpdatedItems( products, newQty, cartKey );
+			const updatedItems = getUpdatedItems( products, newQty.toString(), cartKey );
 			updateCart( {
 				variables: {
 					input: {
@@ -82,7 +91,7 @@ const CartItemsContainer = () => {
     };
     
     // Clear the entire cart.
-	const handleClearCart = ( event ) => {
+	const handleClearCart = ( event: React.MouseEvent<HTMLElement> ) => {
 
 		event.stopPropagation();
 

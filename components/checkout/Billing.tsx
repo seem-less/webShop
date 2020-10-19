@@ -1,8 +1,11 @@
 import React from 'react';
 import countryList from './country-list';
 import Error from "./Error";
+import {CheckoutFormInitialState} from '../../functions';
 
-const Billing = ( { input, handleOnChange } ) => {
+const Billing = ( { input, handleOnChange }:
+					{input: CheckoutFormInitialState,
+					handleOnChange:( event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> ) => void} ) => {
 	return (
 		<React.Fragment>
 			{/*Name*/}
