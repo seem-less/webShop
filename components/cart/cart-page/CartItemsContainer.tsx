@@ -46,6 +46,7 @@ const CartItemsContainer = () => {
 		},
 		onError: ( error ) => {
 			if ( error ) {
+                console.log('Could not successfully update cart');
 				setRequestError( error.graphQLErrors[ 0 ].message );
 			}
 		}
@@ -58,6 +59,7 @@ const CartItemsContainer = () => {
 		},
 		onError: ( error ) => {
 			if ( error ) {
+                console.log('Could not successfully clear cart');
 				setRequestError( error.graphQLErrors[ 0 ].message );
 			}
 		}
