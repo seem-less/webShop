@@ -13,19 +13,29 @@
   "dependencies": {
     "@apollo/client": "^3.1.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.15.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "@types/uuid": "^8.3.0",
+    "@types/validator": "^13.1.0",
     "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.2",
+    "cross-fetch": "^3.0.6",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "next": "^9.5.2",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-masonry-component": "^6.2.1",
+    "typescript": "^4.0.3",
     "uuid": "^8.3.0",
     "validator": "^13.1.1",
     "vercel": "^20.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.8",
+    "@types/react": "^16.9.52"
   }
 }

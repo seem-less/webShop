@@ -1,5 +1,5 @@
 node_modules
 .next
-client-config.js
-wooConfig.js
+client-config.ts
+wooConfig.ts
 .vercel
